@@ -101,6 +101,7 @@
         "COLOR": "Color",
         "OBSERVATION": "Observation",
         "PHONE": "Phone",
+        "SELECT_ADDRESS": "Select the address where the pet was lost or found",
         "ACTIONS": "Actions",
         "EDIT": "Edit",
         "REMOVE": "Remove"
