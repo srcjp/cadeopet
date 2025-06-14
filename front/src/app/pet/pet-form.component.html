@@ -1,44 +1,44 @@
 <form class="pet-form" [formGroup]="form" (ngSubmit)="submit()">
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Status</mat-label>
+    <mat-label>{{ 'PET.STATUS' | translate }}</mat-label>
     <mat-select formControlName="status">
-      <mat-option value="LOST">Perdido</mat-option>
-      <mat-option value="FOUND">Encontrado</mat-option>
+      <mat-option value="LOST">{{ 'PET.STATUS_LOST' | translate }}</mat-option>
+      <mat-option value="FOUND">{{ 'PET.STATUS_FOUND' | translate }}</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Nome</mat-label>
+    <mat-label>{{ 'PET.NAME' | translate }}</mat-label>
     <input matInput formControlName="name" />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Data</mat-label>
+    <mat-label>{{ 'PET.DATE' | translate }}</mat-label>
     <input matInput type="date" formControlName="date" />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Raça</mat-label>
+    <mat-label>{{ 'PET.BREED' | translate }}</mat-label>
     <input matInput formControlName="breed" />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Tamanho</mat-label>
+    <mat-label>{{ 'PET.SIZE' | translate }}</mat-label>
     <input matInput formControlName="size" />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Cor</mat-label>
+    <mat-label>{{ 'PET.COLOR' | translate }}</mat-label>
     <input matInput formControlName="color" />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Observação</mat-label>
+    <mat-label>{{ 'PET.OBSERVATION' | translate }}</mat-label>
     <textarea matInput formControlName="observation"></textarea>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Telefone</mat-label>
+    <mat-label>{{ 'PET.PHONE' | translate }}</mat-label>
     <input matInput formControlName="phone" />
   </mat-form-field>
 
@@ -47,5 +47,5 @@
 
   <input type="file" multiple (change)="onFile($event)" />
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="!canSave()">Salvar</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!canSave()">{{ 'PET.SAVE' | translate }}</button>
 </form>

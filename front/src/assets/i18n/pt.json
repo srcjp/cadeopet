@@ -95,5 +95,25 @@
       "PORTUGUESE": "Português",
       "ENGLISH": "Inglês"
     }
+
+    ,"PET": {
+      "ADD": "Adicionar pet",
+      "MY_RECORDS": "Meus registros",
+      "IMAGE": "Imagem",
+      "STATUS": "Status",
+      "NAME": "Nome",
+      "DATE": "Data",
+      "BREED": "Raça",
+      "SIZE": "Tamanho",
+      "COLOR": "Cor",
+      "OBSERVATION": "Observação",
+      "PHONE": "Telefone",
+      "ACTIONS": "Ações",
+      "EDIT": "Editar",
+      "REMOVE": "Remover",
+      "STATUS_LOST": "Perdido",
+      "STATUS_FOUND": "Encontrado",
+      "SAVE": "Salvar"
+    }
   }
   
