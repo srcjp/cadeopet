@@ -4,7 +4,7 @@
 </div>
 <div id="map" style="height: 400px;"></div>
 
-<table *ngIf="showTable">
+<table *ngIf="showTable" class="my-pets">
   <thead>
     <tr>
       <th>Imagem</th>
@@ -21,7 +21,6 @@
     <tr *ngFor="let p of myPets">
       <td>
         <img *ngIf="p.images?.length" [src]="p.images?.[0]" width="50" />
-        <input type="file" (change)="onImageChange($event, p)" />
       </td>
       <td>{{p.status}}</td>
       <td>{{p.breed}}</td>
