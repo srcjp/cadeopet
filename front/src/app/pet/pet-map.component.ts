@@ -111,7 +111,8 @@ export class PetMapComponent implements OnInit {
           })
         });
         marker.on('click', () => {
-          const expansionZoom = this.cluster!.getClusterExpansionZoom(c.id);
+          if (c.id === undefined) return;
+          const expansionZoom = this.cluster!.getClusterExpansionZoom(+c.id);
           this.map!.setView([lat, lng], expansionZoom);
         });
         this.clusterLayer.addLayer(marker);
