@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +30,7 @@ public class PetReportService {
         report.setImages(paths);
         report.setUser(user);
         report.setDeleted(false);
+        report.setCreatedAt(LocalDateTime.now());
         return repository.save(report);
     }
 

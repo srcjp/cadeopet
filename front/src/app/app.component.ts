@@ -16,5 +16,5 @@ import { FooterComponent } from './shared/footer/footer.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'login-crud-app';
+  title = 'cadeopet';
 }
