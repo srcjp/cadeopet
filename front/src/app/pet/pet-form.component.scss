@@ -1,0 +1,19 @@
+.pet-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.map {
+  height: 300px;
+}
+
+.coords {
+  margin-bottom: 10px;
+}
+
+.full-width {
+  width: 100%;
+}

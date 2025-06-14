@@ -1,0 +1,38 @@
+<div class="actions" *ngIf="loggedIn">
+  <a mat-raised-button color="primary" routerLink="/pet/new">Adicionar pet</a>
+  <button mat-raised-button color="accent" (click)="toggleTable()">Meus registros</button>
+</div>
+<div id="map" style="height: 400px;"></div>
+
+<table *ngIf="showTable">
+  <thead>
+    <tr>
+      <th>Imagem</th>
+      <th>Status</th>
+      <th>Raça</th>
+      <th>Tamanho</th>
+      <th>Cor</th>
+      <th>Observação</th>
+      <th>Telefone</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of myPets">
+      <td>
+        <img *ngIf="p.images?.length" [src]="p.images?.[0]" width="50" />
+        <input type="file" (change)="onImageChange($event, p)" />
+      </td>
+      <td>{{p.status}}</td>
+      <td>{{p.breed}}</td>
+      <td>{{p.size}}</td>
+      <td>{{p.color}}</td>
+      <td>{{p.observation}}</td>
+      <td>{{p.phone}}</td>
+      <td>
+        <a mat-button color="primary" [routerLink]="['/pet', p.id, 'edit']">Editar</a>
+        <button mat-button color="warn" (click)="remove(p)">Remover</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

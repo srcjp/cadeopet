@@ -1,0 +1,99 @@
+{
+    "LOGIN": {
+      "TITLE": "Entrar",
+      "EMAIL_LABEL": "Email",
+      "EMAIL_PLACEHOLDER": "Digite seu email",
+      "EMAIL_REQUIRED": "Email é obrigatório.",
+      "EMAIL_INVALID": "Email inválido.",
+      "PASSWORD_LABEL": "Senha",
+      "PASSWORD_PLACEHOLDER": "Digite sua senha",
+      "PASSWORD_REQUIRED": "Senha é obrigatória.",
+      "FORGOT": "Esqueci minha senha",
+      "REGISTER": "Criar conta",
+      "SUBMIT": "ENTRAR"
+    },
+    "ALERT": {
+      "VERIFY_PENDING": "A conta com o email {{email}} ainda não foi verificada, verifique o código enviado por email"
+    },
+    "SNACK": {
+      "LOGIN_SUCCESS": "Login realizado com sucesso!"
+    },
+    "REGISTER": {
+      "BACK": "Voltar",
+      "TITLE": "Criar Conta",
+      "FIRST_NAME_LABEL": "Nome",
+      "LAST_NAME_LABEL": "Sobrenome",
+      "EMAIL_LABEL": "Email",
+      "PHONE_LABEL": "Telefone",
+      "GENDER_LABEL": "Gênero",
+      "GENDER_MALE": "Masculino",
+      "GENDER_FEMALE": "Feminino",
+      "ALREADY_HAVE": "Já tenho conta",
+      "SUBMIT": "Cadastrar",
+      "PASSWORD_LABEL": "Senha",
+      "PASSWORD_PLACEHOLDER": "Digite sua senha",
+      "ALREADY_VERIFIED": "Conta já existe, faça o login",
+      "PENDING_VERIFICATION": "Conta criada mas não verificada, faça o login"
+    },
+    "OVERLAY": {
+      "LOADING": ""
+    },
+    "VERIFY":{
+      "BACK": "Voltar",
+      "TITLE": "Verificar Código",
+      "OTP_LABEL": "Código OTP",
+      "SUBMIT": "Verificar",
+      "LOADING": "Verificando...",
+      "OTP_SENT": "Código OTP enviado para o email: {{email}}",
+      "PLEASE_RESET": "Agora resete sua senha.",
+      "SUCCESS": "Conta verificada com sucesso, Faça o login"
+    },
+     "CONFIG": {
+      "PORTUGUESE": "",
+      "ENGLISH": ""
+     },
+     "RECOVERY": {
+      "BACK": "Voltar",
+      "TITLE": "Esqueci a Senha",
+      "EMAIL_LABEL": "Email",
+      "EMAIL_PLACEHOLDER": "Digite seu email",
+      "SUBMIT": "Enviar OTP"
+    },
+    "SNACK": {
+      "OTP_SENT": "Código OTP enviado para seu e-mail.",
+      "CLOSE": "Fechar"
+    },
+    "VERIFY": {
+      "BACK": "Voltar",
+      "TITLE": "Verificar Código",
+      "OTP_LABEL": "Código OTP",
+      "SUBMIT": "Verificar",
+      "LOADING": "Verificando...",
+      "OTP_SENT": "Código OTP enviado para o email {{email}}",
+      "PLEASE_RESET": "Agora altere sua senha.",
+      "SUCCESS": "Conta verificada com sucesso, faça o login"
+    },
+    "RESET": {
+      "TITLE": "Redefinir Senha",
+      "EMAIL_LABEL": "Email",
+      "NEW_PASSWORD_LABEL": "Nova Senha",
+      "NEW_PASSWORD_PLACEHOLDER": "Digite a nova senha",
+      "CONFIRM_PASSWORD_LABEL": "Confirmar Senha",
+      "CONFIRM_PASSWORD_PLACEHOLDER": "Repita a nova senha",
+      "SHOW_PASSWORD": "Mostrar senha",
+      "HIDE_PASSWORD": "Ocultar senha",
+      "BACK": "Voltar",
+      "SUBMIT": "Redefinir",
+      "LOADING": "Processando...",
+      "PASSWORD_MISMATCH": "As senhas não coincidem.",
+      "SUCCESS_MESSAGE": "Senha redefinida com sucesso!"
+    },
+    "COMMON": {
+      "CLOSE": "Fechar"
+    },
+    "INTERNATIONALIZATION": {
+      "PORTUGUESE": "Português",
+      "ENGLISH": "Inglês"
+    }
+  }
+  

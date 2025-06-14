@@ -1,0 +1,41 @@
+<form class="pet-form" [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      <mat-option value="LOST">Perdido</mat-option>
+      <mat-option value="FOUND">Encontrado</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Raça</mat-label>
+    <input matInput formControlName="breed" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Tamanho</mat-label>
+    <input matInput formControlName="size" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Cor</mat-label>
+    <input matInput formControlName="color" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Observação</mat-label>
+    <textarea matInput formControlName="observation"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Telefone</mat-label>
+    <input matInput formControlName="phone" />
+  </mat-form-field>
+
+  <div id="selectMap" class="map"></div>
+  <div class="coords">Lat: {{form.value.latitude}} - Lng: {{form.value.longitude}}</div>
+
+  <input type="file" multiple (change)="onFile($event)" />
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="!canSave()">Salvar</button>
+</form>

@@ -1,0 +1,40 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <a class="back-link" routerLink="/login">
+      <mat-icon>arrow_back</mat-icon>
+      {{ 'VERIFY.BACK' | translate }}
+    </a>
+    
+    <h1 class="title">{{ 'VERIFY.TITLE' | translate }}</h1>
+
+    <form [formGroup]="verifyForm" (ngSubmit)="onVerify()">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>{{ 'VERIFY.OTP_LABEL' | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="otp"
+          maxlength="6"
+          placeholder="{{ 'VERIFY.OTP_LABEL' | translate }}"
+        />
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="login-button"
+        type="submit"
+      >
+        {{ 'VERIFY.SUBMIT' | translate }}
+      </button>
+    </form>
+  </mat-card>
+</div>
+
+<div class="overlay" *ngIf="loading">
+  <mat-progress-spinner
+    mode="indeterminate"
+    diameter="60"
+    [attr.aria-label]="'VERIFY.LOADING' | translate"
+  >
+  </mat-progress-spinner>
+</div>

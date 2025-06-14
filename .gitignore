@@ -1,0 +1,11 @@
+# Maven build artifacts
+back/target/
+
+# IDE files
+back/.idea/
+
+# Node modules
+front/node_modules/
+
+# Logs
+*.log

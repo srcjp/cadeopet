@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>
+    <span [ngClass]="type">{{ title }}</span>
+    <button mat-icon-button (click)="close()" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </h2>
+  <mat-dialog-content>
+    <p>{{ message }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button color="primary" (click)="close()">{{ okLabel }}</button>
+  </mat-dialog-actions>

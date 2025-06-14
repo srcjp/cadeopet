@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import "leaflet/dist/leaflet.css";
+/* Esconde o reveal do Edge/IE */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Esconde o reveal do WebKit (Chrome, Safari) */
+input[type="password"]::-webkit-textfield-decoration-container {
+  display: none !important;
+}
+
+/* Garante que não venha nenhuma aparição extra */
+input[type="password"] {
+  -webkit-appearance: none;
+}

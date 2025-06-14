@@ -1,0 +1,22 @@
+<header class="app-header">
+  <div class="logo">Login Boilerplate</div>
+
+  <div class="right-actions">
+    <a *ngIf="!loggedIn" mat-button routerLink="/login" class="login-button">{{ 'LOGIN.TITLE' | translate }}</a>
+    <button *ngIf="loggedIn" mat-button (click)="logout()">Logout</button>
+    <div class="lang-menu">
+      <button mat-button [matMenuTriggerFor]="menu">
+        {{ currentLang === 'pt' ? 'Português' : 'English' }}
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="switchLang('pt')">
+          {{ 'INTERNATIONALIZATION.PORTUGUESE' | translate }}
+        </button>
+        <button mat-menu-item (click)="switchLang('en')">
+          {{ 'INTERNATIONALIZATION.ENGLISH' | translate }}
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</header>

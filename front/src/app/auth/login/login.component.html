@@ -1,0 +1,59 @@
+<mat-card class="login-card">
+  <h1 class="title">{{ 'LOGIN.TITLE' | translate }}</h1>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'LOGIN.EMAIL_LABEL' | translate }}</mat-label>
+      <input
+        matInput
+        [placeholder]="'LOGIN.EMAIL_PLACEHOLDER' | translate"
+        formControlName="email"
+        type="email" />
+      <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+        {{ 'LOGIN.EMAIL_REQUIRED' | translate }}
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+        {{ 'LOGIN.EMAIL_INVALID' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'LOGIN.PASSWORD_LABEL' | translate }}</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        [placeholder]="'LOGIN.PASSWORD_PLACEHOLDER' | translate"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="hidePassword ? ('LOGIN.PASSWORD_PLACEHOLDER' | translate) : ('LOGIN.PASSWORD_PLACEHOLDER' | translate)"
+      >
+        <mat-icon>
+          {{ hidePassword ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+      </button>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+        {{ 'LOGIN.PASSWORD_REQUIRED' | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <div class="links-container">
+      <a class="link" routerLink="/recovery">{{ 'LOGIN.FORGOT' | translate }}</a>
+      <a class="link" routerLink="/register">{{ 'LOGIN.REGISTER' | translate }}</a>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      class="login-button"
+      type="submit"
+      [disabled]="loginForm.invalid || loading"
+    >
+      {{ 'LOGIN.SUBMIT' | translate }}
+    </button>
+  </form>
+</mat-card>
