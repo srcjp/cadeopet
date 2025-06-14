@@ -9,6 +9,8 @@
     <tr>
       <th>Imagem</th>
       <th>Status</th>
+      <th>Nome</th>
+      <th>Data</th>
       <th>Raça</th>
       <th>Tamanho</th>
       <th>Cor</th>
@@ -23,6 +25,8 @@
         <img *ngIf="p.images?.length" [src]="p.images?.[0]" width="50" />
       </td>
       <td>{{p.status}}</td>
+      <td>{{p.name}}</td>
+      <td>{{p.date}}</td>
       <td>{{p.breed}}</td>
       <td>{{p.size}}</td>
       <td>{{p.color}}</td>

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -29,6 +30,8 @@ public class PetReport {
     private String color;
     private String observation;
     private String phone;
+    private String name;
+    private LocalDate date;
     private Double latitude;
     private Double longitude;
 
