@@ -1,4 +1,8 @@
-#map { height: 400px; }
+#map {
+  height: 400px;
+  position: relative;
+  z-index: 0;
+}
 
 .actions {
   margin: 10px 0;
@@ -16,7 +20,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10000;
+  z-index: 100000;
 
   .close-btn {
     position: absolute;
@@ -31,15 +35,15 @@
 }
 
 .img-overlay img {
-  width: 220px;
-  height: 220px;
+  width: 220.5px;
+  height: 212.89px;
   object-fit: cover;
   border: 4px solid #fff;
 }
 
 .popup-img {
-  width: 220px;
-  height: 220px;
+  width: 220.5px;
+  height: 212.89px;
   object-fit: cover;
   cursor: pointer;
 }
