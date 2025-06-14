@@ -1,0 +1,7 @@
+/* Minimal placeholder for MarkerCluster styles */
+.marker-cluster {
+  background-color: rgba(181, 226, 140, 0.6);
+  border-radius: 20px;
+  color: #000;
+  text-align: center;
+}
