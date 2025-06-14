@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
-import 'leaflet.markercluster';
+import Supercluster from 'supercluster';
 import { PetService, PetReport } from './pet.service';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pet-map',
@@ -16,6 +15,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class PetMapComponent implements OnInit {
   private map?: L.Map;
+  private cluster?: Supercluster<{ pet: PetReport }>;
+  private clusterLayer = L.layerGroup();
   pets: PetReport[] = [];
   myPets: PetReport[] = [];
   showTable = false;
@@ -30,6 +31,7 @@ export class PetMapComponent implements OnInit {
     this.service.list().subscribe({
       next: pets => {
         this.pets = pets;
+        this.buildCluster();
         this.initMap();
       },
       error: () => this.initMap()
@@ -50,6 +52,7 @@ export class PetMapComponent implements OnInit {
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
       }).addTo(this.map);
+      this.map.addLayer(this.clusterLayer);
       this.loadMarkers();
 
       }, () => {
@@ -60,16 +63,61 @@ export class PetMapComponent implements OnInit {
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
       }).addTo(this.map);
+      this.map.addLayer(this.clusterLayer);
       this.loadMarkers();
     });
   }
 
   private loadMarkers() {
-    if(!this.map) return;
-    const cluster = (L as any).markerClusterGroup();
-    for(const pet of this.pets){
-      if(pet.latitude && pet.longitude){
-        const marker = L.marker([pet.latitude, pet.longitude]);
+    if(!this.map || !this.cluster) return;
+    this.clusterLayer.clearLayers();
+    this.updateClusters();
+    this.map.on('moveend zoomend', () => this.updateClusters());
+  }
+
+  private buildCluster(){
+    const points = this.pets
+      .filter(p => p.latitude && p.longitude)
+      .map(p => ({
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [p.longitude!, p.latitude!] },
+        properties: { pet: p }
+      }));
+
+    this.cluster = new Supercluster({ radius: 40, maxZoom: 18 });
+    this.cluster.load(points as any);
+  }
+
+  private updateClusters(){
+    if(!this.map || !this.cluster) return;
+    const bounds = this.map.getBounds();
+    const zoom = this.map.getZoom();
+    const bbox: [number, number, number, number] = [
+      bounds.getWest(),
+      bounds.getSouth(),
+      bounds.getEast(),
+      bounds.getNorth()
+    ];
+    const clusters = this.cluster.getClusters(bbox, zoom);
+    for(const c of clusters){
+      const [lng, lat] = c.geometry.coordinates as [number, number];
+      if((c.properties as any).cluster){
+        const count = (c.properties as any).point_count as number;
+        const marker = L.marker([lat, lng], {
+          icon: L.divIcon({
+            html: `<div class="cluster-icon">${count}</div>`,
+            className: '',
+            iconSize: [30,30]
+          })
+        });
+        marker.on('click', () => {
+          const expansionZoom = this.cluster!.getClusterExpansionZoom(c.id);
+          this.map!.setView([lat, lng], expansionZoom);
+        });
+        this.clusterLayer.addLayer(marker);
+      } else {
+        const pet = (c.properties as any).pet as PetReport;
+        const marker = L.marker([lat, lng]);
         const img = pet.images && pet.images[0] ? `<img src="${pet.images[0]}" class="popup-img" />` : '';
         const html = `${img}<div><strong>${pet.name || ''}</strong><br/>${pet.date || ''}<br/><strong>${pet.status}</strong><br/>${pet.breed || ''}<br/>${pet.color || ''}<br/>${pet.phone || ''}<br/>${pet.observation || ''}</div>`;
         marker.bindPopup(html);
@@ -92,10 +140,9 @@ export class PetMapComponent implements OnInit {
             });
           }
         });
-        cluster.addLayer(marker);
+        this.clusterLayer.addLayer(marker);
       }
     }
-    this.map.addLayer(cluster);
   }
 
   toggleTable(){

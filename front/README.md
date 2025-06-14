@@ -8,12 +8,9 @@ Before running or building the application, install the project dependencies:
 npm install
 ```
 
-If the build complains about missing `leaflet.markercluster` types, make sure the
-package `@types/leaflet.markercluster` is installed:
-
-```bash
-npm install --save-dev @types/leaflet.markercluster
-```
+This project uses [supercluster](https://github.com/mapbox/supercluster) to
+cluster map markers. The dependency is installed automatically with the regular
+`npm install` command.
 
 ## Development server
 
