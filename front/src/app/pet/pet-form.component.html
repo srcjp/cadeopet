@@ -1,4 +1,7 @@
 <form class="pet-form" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="loading-overlay" *ngIf="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
   <button mat-icon-button type="button" class="close-btn" (click)="close()" *ngIf="dialogRef">
     <mat-icon>close</mat-icon>
   </button>
@@ -48,6 +51,9 @@
       <div class="coords">Lat: {{form.value.latitude}} - Lng: {{form.value.longitude}}</div>
 
       <input type="file" multiple (change)="onFile($event)" />
+      <div class="preview-list">
+        <img *ngFor="let img of imageUrls" [src]="img" />
+      </div>
     </div>
   </div>
   <div class="actions">

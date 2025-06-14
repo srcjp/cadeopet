@@ -194,8 +194,8 @@ export class PetMapComponent implements OnInit {
   openPetForm(id?: number) {
     this.dialog
       .open(PetFormComponent, {
-        width: '90vw',
-        maxWidth: '90vw',
+        width: '95vw',
+        maxWidth: '95vw',
         data: id ? { id } : undefined
       })
       .afterClosed()
