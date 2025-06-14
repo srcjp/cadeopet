@@ -6,12 +6,14 @@ import Supercluster from 'supercluster';
 import { PetService, PetReport } from './pet.service';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MyPetsDialogComponent } from './my-pets-dialog.component';
 
 @Component({
   selector: 'app-pet-map',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, TranslateModule],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatDialogModule, TranslateModule],
   templateUrl: './pet-map.component.html',
   styleUrls: ['./pet-map.component.scss']
 })
@@ -21,9 +23,12 @@ export class PetMapComponent implements OnInit {
   private clusterLayer = L.layerGroup();
   pets: PetReport[] = [];
   myPets: PetReport[] = [];
-  showTable = false;
 
-  constructor(private service: PetService, private translate: TranslateService) {}
+  constructor(
+    private service: PetService,
+    private translate: TranslateService,
+    private dialog: MatDialog
+  ) {}
 
   get loggedIn(): boolean {
     return !!localStorage.getItem('accessToken');
@@ -174,8 +179,12 @@ export class PetMapComponent implements OnInit {
     }
   }
 
-  toggleTable(){
-    this.showTable = !this.showTable;
+  openMyPets() {
+    this.dialog.open(MyPetsDialogComponent, {
+      width: '90%',
+      maxWidth: '600px',
+      data: { pets: this.myPets }
+    });
   }
 
   remove(p: PetReport){

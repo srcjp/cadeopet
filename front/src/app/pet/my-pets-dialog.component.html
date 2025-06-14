@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-title>{{ 'PET.MY_RECORDS' | translate }}</mat-card-title>
+  <mat-card-content>
+    <table class="my-pets">
+      <thead>
+        <tr>
+          <th>{{ 'PET.IMAGE' | translate }}</th>
+          <th>{{ 'PET.STATUS' | translate }}</th>
+          <th>{{ 'PET.NAME' | translate }}</th>
+          <th>{{ 'PET.DATE' | translate }}</th>
+          <th>{{ 'PET.BREED' | translate }}</th>
+          <th>{{ 'PET.SIZE' | translate }}</th>
+          <th>{{ 'PET.COLOR' | translate }}</th>
+          <th>{{ 'PET.OBSERVATION' | translate }}</th>
+          <th>{{ 'PET.PHONE' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of data.pets">
+          <td>
+            <img *ngIf="p.images?.length" [src]="p.images?.[0]" width="50" />
+          </td>
+          <td>{{ p.status }}</td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.date | date:'dd/MM/yyyy' }}</td>
+          <td>{{ p.breed }}</td>
+          <td>{{ p.size }}</td>
+          <td>{{ p.color }}</td>
+          <td>{{ p.observation }}</td>
+          <td>{{ p.phone }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button (click)="close()">{{ 'COMMON.CLOSE' | translate }}</button>
+  </mat-card-actions>
+</mat-card>
