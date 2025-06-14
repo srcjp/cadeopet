@@ -5,7 +5,7 @@ import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PetService } from './pet.service';
 import * as L from 'leaflet';
-import { defaultIcon } from './map-icon';
+import { lostIcon, foundIcon } from './map-icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,6 +43,10 @@ export class PetFormComponent implements OnInit, AfterViewInit {
   private marker?: L.Marker;
   private pendingCoords?: L.LatLngTuple;
 
+  private getCurrentIcon(): L.Icon {
+    return this.form?.value.status === 'FOUND' ? foundIcon : lostIcon;
+  }
+
   id?: number;
 
   constructor(
@@ -65,6 +69,7 @@ export class PetFormComponent implements OnInit, AfterViewInit {
       latitude: [null, Validators.required],
       longitude: [null, Validators.required]
     });
+    this.form.get('status')!.valueChanges.subscribe(() => this.updateMarkerIcon());
     if (data && data.id) {
       this.id = data.id;
     }
@@ -116,8 +121,14 @@ export class PetFormComponent implements OnInit, AfterViewInit {
     if(this.map && this.pendingCoords){
       const [lat, lng] = this.pendingCoords;
       this.pendingCoords = undefined;
-      this.marker = L.marker([lat, lng], { icon: defaultIcon }).addTo(this.map);
+      this.marker = L.marker([lat, lng], { icon: this.getCurrentIcon() }).addTo(this.map);
       this.map.setView([lat, lng], 13);
+    }
+  }
+
+  private updateMarkerIcon(){
+    if(this.marker){
+      this.marker.setIcon(this.getCurrentIcon());
     }
   }
 
@@ -125,7 +136,7 @@ export class PetFormComponent implements OnInit, AfterViewInit {
     if(this.marker){
       this.map!.removeLayer(this.marker);
     }
-    this.marker = L.marker(ev.latlng, { icon: defaultIcon }).addTo(this.map!);
+    this.marker = L.marker(ev.latlng, { icon: this.getCurrentIcon() }).addTo(this.map!);
     this.form.patchValue({
       latitude: ev.latlng.lat,
       longitude: ev.latlng.lng
