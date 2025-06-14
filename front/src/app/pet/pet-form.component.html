@@ -50,6 +50,7 @@
       <div id="selectMap" class="map"></div>
       <div class="coords">Lat: {{form.value.latitude}} - Lng: {{form.value.longitude}}</div>
 
+      <label class="images-label">{{ 'PET.IMAGES' | translate }}</label>
       <input type="file" multiple (change)="onFile($event)" />
       <div class="preview-list">
         <img *ngFor="let img of imageUrls" [src]="img" />
