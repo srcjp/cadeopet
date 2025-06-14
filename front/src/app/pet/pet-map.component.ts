@@ -90,6 +90,7 @@ export class PetMapComponent implements OnInit {
 
   private updateClusters(){
     if(!this.map || !this.cluster) return;
+    this.clusterLayer.clearLayers();
     const bounds = this.map.getBounds();
     const zoom = this.map.getZoom();
     const bbox: [number, number, number, number] = [
