@@ -4,7 +4,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["leaflet"]
+    "types": ["leaflet", "leaflet.markercluster"]
   },
   "files": [
     "src/main.ts"
