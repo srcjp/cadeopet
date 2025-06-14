@@ -1,1 +1,1 @@
-declare module 'leaflet.markercluster/dist/leaflet.markercluster.js';
+declare module 'leaflet.markercluster';
