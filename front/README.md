@@ -2,6 +2,19 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
 
+Before running or building the application, install the project dependencies:
+
+```bash
+npm install
+```
+
+If the build complains about missing `leaflet.markercluster` types, make sure the
+package `@types/leaflet.markercluster` is installed:
+
+```bash
+npm install --save-dev @types/leaflet.markercluster
+```
+
 ## Development server
 
 To start a local development server, run:
