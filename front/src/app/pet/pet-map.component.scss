@@ -16,11 +16,21 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100000;
+
+  .img-card {
+    position: relative;
+    width: 80vw;
+    max-width: 80vw;
+    max-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .close-btn {
     position: absolute;
@@ -31,19 +41,21 @@
     color: #fff;
     font-size: 24px;
     cursor: pointer;
+    z-index: 1;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 4px solid #fff;
   }
 }
 
-.img-overlay img {
-  width: 220.5px;
-  height: 212.89px;
-  object-fit: cover;
-  border: 4px solid #fff;
-}
-
 .popup-img {
-  width: 220.5px;
-  height: 212.89px;
+  width: 240px;
+  height: 220px;
   object-fit: cover;
   cursor: pointer;
 }

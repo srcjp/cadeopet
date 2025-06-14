@@ -131,9 +131,16 @@ export class PetMapComponent implements OnInit {
             imgEl.addEventListener('click', () => {
               const src = imgEl.getAttribute('src');
               if (src) {
+                const existing = document.querySelector('.img-overlay');
+                if (existing) existing.remove();
+
                 const overlay = document.createElement('div');
                 overlay.className = 'img-overlay';
-                overlay.innerHTML = `<button class="close-btn">X</button><img src="${src}"/>`;
+                overlay.innerHTML = `
+                  <div class="mat-card img-card">
+                    <button class="close-btn material-icons">close</button>
+                    <img src="${src}" />
+                  </div>`;
                 const btn = overlay.querySelector('.close-btn') as HTMLButtonElement;
                 btn.addEventListener('click', () => overlay.remove());
                 overlay.addEventListener('click', e => {
