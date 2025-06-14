@@ -3,7 +3,7 @@
   <div class="popup-info-card">
     <div class="info-item" *ngIf="pet.name"><span class="label">{{ 'PET.NAME' | translate }}:</span> {{ pet.name }}</div>
     <div class="info-item" *ngIf="pet.date"><span class="label">{{ 'PET.DATE' | translate }}:</span> {{ pet.date | date:'dd/MM/yyyy' }}</div>
-    <div class="info-item"><span class="label">{{ 'PET.STATUS' | translate }}:</span> {{ pet.status }}</div>
+    <div class="info-item"><span class="label">{{ 'PET.STATUS' | translate }}:</span> {{ ('PET.STATUS_' + pet.status) | translate }}</div>
     <div class="info-item" *ngIf="pet.breed"><span class="label">{{ 'PET.BREED' | translate }}:</span> {{ pet.breed }}</div>
     <div class="info-item" *ngIf="pet.size"><span class="label">{{ 'PET.SIZE' | translate }}:</span> {{ pet.size }}</div>
     <div class="info-item" *ngIf="pet.color"><span class="label">{{ 'PET.COLOR' | translate }}:</span> {{ pet.color }}</div>
