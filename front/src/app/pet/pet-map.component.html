@@ -1,5 +1,5 @@
 <div class="actions" *ngIf="loggedIn">
-  <a mat-raised-button color="primary" routerLink="/pet/new">{{ 'PET.ADD' | translate }}</a>
+  <button mat-raised-button color="primary" (click)="openPetForm()">{{ 'PET.ADD' | translate }}</button>
   <button mat-raised-button color="accent" (click)="openMyPets()">{{ 'PET.MY_RECORDS' | translate }}</button>
 </div>
 <div id="map"></div>
