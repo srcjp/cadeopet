@@ -12,24 +12,4 @@ import { PetReport } from './pet.service';
 })
 export class PetPopupComponent {
   @Input() pet!: PetReport;
-
-  openImage(src?: string) {
-    if (!src) return;
-    const existing = document.querySelector('.img-overlay');
-    if (existing) existing.remove();
-
-    const overlay = document.createElement('div');
-    overlay.className = 'img-overlay';
-    overlay.innerHTML = `
-      <div class="mat-card img-card">
-        <button class="close-btn material-icons">close</button>
-        <img src="${src}" />
-      </div>`;
-    const btn = overlay.querySelector('.close-btn') as HTMLButtonElement;
-    btn.addEventListener('click', () => overlay.remove());
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay) overlay.remove();
-    });
-    document.body.appendChild(overlay);
-  }
 }

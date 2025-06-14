@@ -33,7 +33,7 @@ export class MyPetsDialogComponent {
   remove(p: PetReport) {
     if (!p.id) return;
     this.service.delete(p.id).subscribe(() => {
-      this.data.pets = this.data.pets.filter(m => m.id !== p.id);
+      p.deleted = true;
     });
   }
 

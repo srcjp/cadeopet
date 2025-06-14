@@ -8,3 +8,20 @@ table.my-pets td {
   text-align: center;
   padding: 4px;
 }
+
+table.my-pets tr.deleted {
+  position: relative;
+}
+
+table.my-pets tr.deleted::after {
+  content: 'Registros removidos';
+  position: absolute;
+  inset: 0;
+  background: rgba(240, 240, 240, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #555;
+  pointer-events: none;
+}
