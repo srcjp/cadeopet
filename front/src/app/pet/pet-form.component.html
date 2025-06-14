@@ -1,52 +1,57 @@
 <form class="pet-form" [formGroup]="form" (ngSubmit)="submit()">
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>{{ 'PET.STATUS' | translate }}</mat-label>
-    <mat-select formControlName="status">
-      <mat-option value="LOST">{{ 'PET.STATUS_LOST' | translate }}</mat-option>
-      <mat-option value="FOUND">{{ 'PET.STATUS_FOUND' | translate }}</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <button mat-icon-button type="button" class="close-btn" (click)="close()" *ngIf="dialogRef">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="form-columns">
+    <div class="column">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'PET.STATUS' | translate }}</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="LOST">{{ 'PET.STATUS_LOST' | translate }}</mat-option>
+          <mat-option value="FOUND">{{ 'PET.STATUS_FOUND' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'PET.NAME' | translate }}</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'PET.DATE' | translate }}</mat-label>
+        <input matInput type="date" formControlName="date" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'PET.BREED' | translate }}</mat-label>
+        <input matInput formControlName="breed" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'PET.SIZE' | translate }}</mat-label>
+        <input matInput formControlName="size" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'PET.COLOR' | translate }}</mat-label>
+        <input matInput formControlName="color" />
+      </mat-form-field>
+    </div>
+    <div class="column">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'PET.OBSERVATION' | translate }}</mat-label>
+        <textarea matInput formControlName="observation"></textarea>
+      </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>{{ 'PET.NAME' | translate }}</mat-label>
-    <input matInput formControlName="name" />
-  </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'PET.PHONE' | translate }}</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>{{ 'PET.DATE' | translate }}</mat-label>
-    <input matInput type="date" formControlName="date" />
-  </mat-form-field>
+      <label class="address-label">{{ 'PET.SELECT_ADDRESS' | translate }}</label>
+      <div id="selectMap" class="map"></div>
+      <div class="coords">Lat: {{form.value.latitude}} - Lng: {{form.value.longitude}}</div>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>{{ 'PET.BREED' | translate }}</mat-label>
-    <input matInput formControlName="breed" />
-  </mat-form-field>
-
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>{{ 'PET.SIZE' | translate }}</mat-label>
-    <input matInput formControlName="size" />
-  </mat-form-field>
-
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>{{ 'PET.COLOR' | translate }}</mat-label>
-    <input matInput formControlName="color" />
-  </mat-form-field>
-
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>{{ 'PET.OBSERVATION' | translate }}</mat-label>
-    <textarea matInput formControlName="observation"></textarea>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>{{ 'PET.PHONE' | translate }}</mat-label>
-    <input matInput formControlName="phone" />
-  </mat-form-field>
-
-  <div id="selectMap" class="map"></div>
-  <div class="coords">Lat: {{form.value.latitude}} - Lng: {{form.value.longitude}}</div>
-
-  <input type="file" multiple (change)="onFile($event)" />
-
-  <button mat-raised-button color="primary" type="submit" [disabled]="!canSave()">{{ 'PET.SAVE' | translate }}</button>
-  <button mat-button type="button" (click)="close()" *ngIf="dialogRef">{{ 'COMMON.CLOSE' | translate }}</button>
+      <input type="file" multiple (change)="onFile($event)" />
+    </div>
+  </div>
+  <div class="actions">
+    <button mat-raised-button color="primary" type="submit" [disabled]="!canSave()">{{ 'PET.SAVE' | translate }}</button>
+    <button mat-button type="button" (click)="close()" *ngIf="dialogRef">{{ 'COMMON.CLOSE' | translate }}</button>
+  </div>
 </form>
