@@ -49,7 +49,7 @@ public class PetReportService {
 
     public PetReport updateReport(Long id, PetReport data, MultipartFile[] files, User user) throws IOException {
         PetReport existing = repository.findById(id).orElseThrow();
-        if(!existing.getUser().equals(user)) return existing;
+        if(!existing.getUser().getId().equals(user.getId())) return existing;
 
         existing.setStatus(data.getStatus());
         existing.setBreed(data.getBreed());
@@ -74,7 +74,7 @@ public class PetReportService {
 
     public void softDelete(Long id, User user){
         PetReport existing = repository.findById(id).orElseThrow();
-        if(!existing.getUser().equals(user)) return;
+        if(!existing.getUser().getId().equals(user.getId())) return;
         existing.setDeleted(true);
         repository.save(existing);
     }
