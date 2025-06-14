@@ -122,7 +122,7 @@ export class PetMapComponent implements OnInit {
         const pet = (c.properties as any).pet as PetReport;
         const marker = L.marker([lat, lng], { icon: defaultIcon });
         const img = pet.images && pet.images[0]
-          ? `<img src="${pet.images[0]}" class="popup-img" />`
+          ? `<img src="${pet.images[0]}" class="popup-img" style="width:210px;height:232px;" />`
           : '';
         const info = `
           ${pet.name ? `<div class="info-item"><span class="label">Nome:</span> ${pet.name}</div>` : ''}
@@ -134,7 +134,12 @@ export class PetMapComponent implements OnInit {
           ${pet.phone ? `<div class="info-item"><span class="label">Telefone:</span> ${pet.phone}</div>` : ''}
           ${pet.observation ? `<div class="info-item"><span class="label">Observação:</span> ${pet.observation}</div>` : ''}
         `;
-        const html = `${img}<div class="popup-info">${info}</div>`;
+        const html = `
+          <div class="popup-card">
+            ${img}
+            <div class="popup-info-card">${info}</div>
+          </div>
+        `;
         marker.bindPopup(html, { className: 'pet-popup', maxWidth: 260 });
         marker.on('popupopen', () => {
           const popupEl = marker.getPopup()?.getElement();
