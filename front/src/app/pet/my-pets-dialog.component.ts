@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
-import { PetReport } from './pet.service';
+import { PetReport, PetService } from './pet.service';
 
 @Component({
   selector: 'app-my-pets-dialog',
@@ -24,10 +24,18 @@ import { PetReport } from './pet.service';
 export class MyPetsDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<MyPetsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { pets: PetReport[] }
+    @Inject(MAT_DIALOG_DATA) public data: { pets: PetReport[] },
+    private service: PetService
   ) {}
 
   close() {
     this.dialogRef.close();
+  }
+
+  remove(p: PetReport) {
+    if (!p.id) return;
+    this.service.delete(p.id).subscribe(() => {
+      this.data.pets = this.data.pets.filter(m => m.id !== p.id);
+    });
   }
 }
