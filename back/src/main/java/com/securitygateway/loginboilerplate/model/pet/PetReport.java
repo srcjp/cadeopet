@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -49,5 +50,8 @@ public class PetReport {
     @Column(nullable = false, columnDefinition = "boolean default false")
     @Builder.Default
     private Boolean deleted = false;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 }
 

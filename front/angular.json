@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "login-crud-app": {
+    "cadeopet": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/login-crud-app",
+            "outputPath": "dist/cadeopet",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "login-crud-app:build:production"
+              "buildTarget": "cadeopet:build:production"
             },
             "development": {
-              "buildTarget": "login-crud-app:build:development"
+              "buildTarget": "cadeopet:build:development"
             }
           },
           "defaultConfiguration": "development"
