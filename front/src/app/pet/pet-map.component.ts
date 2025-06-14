@@ -69,7 +69,7 @@ export class PetMapComponent implements OnInit {
       if(pet.latitude && pet.longitude){
         const marker = L.marker([pet.latitude, pet.longitude]).addTo(this.map!);
         const img = pet.images && pet.images[0] ? `<img src="${pet.images[0]}" class="popup-img" />` : '';
-        const html = `${img}<div><strong>${pet.status}</strong><br/>${pet.breed || ''}<br/>${pet.color || ''}<br/>${pet.phone || ''}<br/>${pet.observation || ''}</div>`;
+        const html = `${img}<div><strong>${pet.name || ''}</strong><br/>${pet.date || ''}<br/><strong>${pet.status}</strong><br/>${pet.breed || ''}<br/>${pet.color || ''}<br/>${pet.phone || ''}<br/>${pet.observation || ''}</div>`;
         marker.bindPopup(html);
         marker.on('popupopen', () => {
           const el = document.querySelector('.popup-img') as HTMLImageElement;
@@ -79,8 +79,12 @@ export class PetMapComponent implements OnInit {
               if(src){
                 const overlay = document.createElement('div');
                 overlay.className = 'img-overlay';
-                overlay.innerHTML = `<img src="${src}"/>`;
-                overlay.addEventListener('click', () => overlay.remove());
+                overlay.innerHTML = `<button class="close-btn">X</button><img src="${src}"/>`;
+                const btn = overlay.querySelector('.close-btn') as HTMLButtonElement;
+                btn.addEventListener('click', () => overlay.remove());
+                overlay.addEventListener('click', e => {
+                  if(e.target === overlay) overlay.remove();
+                });
                 document.body.appendChild(overlay);
               }
             });
@@ -106,6 +110,8 @@ export class PetMapComponent implements OnInit {
     const files: FileList = event.target.files;
     const data = new FormData();
     data.append('status', p.status);
+    if(p.name) data.append('name', p.name);
+    if(p.date) data.append('date', p.date);
     if(p.breed) data.append('breed', p.breed);
     if(p.size) data.append('size', p.size);
     if(p.color) data.append('color', p.color);

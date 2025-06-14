@@ -57,6 +57,8 @@ public class PetReportService {
         existing.setColor(data.getColor());
         existing.setObservation(data.getObservation());
         existing.setPhone(data.getPhone());
+        existing.setName(data.getName());
+        existing.setDate(data.getDate());
         existing.setLatitude(data.getLatitude());
         existing.setLongitude(data.getLongitude());
 

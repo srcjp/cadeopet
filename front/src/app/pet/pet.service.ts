@@ -6,6 +6,8 @@ import { Observable, map } from 'rxjs';
 export interface PetReport {
   id?: number;
   status: string;
+  name?: string;
+  date?: string;
   breed?: string;
   size?: string;
   color?: string;

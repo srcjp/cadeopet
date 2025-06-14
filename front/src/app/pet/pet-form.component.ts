@@ -36,6 +36,8 @@ export class PetFormComponent implements OnInit, AfterViewInit {
   constructor(private fb: FormBuilder, private service: PetService, private router: Router, private route: ActivatedRoute) {
     this.form = this.fb.group({
       status: ['LOST', Validators.required],
+      name: ['', Validators.required],
+      date: ['', Validators.required],
       breed: ['', Validators.required],
       size: ['', Validators.required],
       color: ['', Validators.required],
