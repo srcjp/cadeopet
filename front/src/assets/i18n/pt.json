@@ -116,6 +116,19 @@
       "STATUS_LOST": "Perdido",
       "STATUS_FOUND": "Encontrado",
       "SAVE": "Salvar"
+    },
+    "FOOTER": {
+      "BY": "by jpfurlan"
+    },
+    "CONTRIBUTE": {
+      "TITLE": "Contribua",
+      "TEXT": "Ajude a manter o projeto, servidores, domínio e manutenção.",
+      "PIX": "Chave Pix",
+      "BITCOIN": "Endereço Bitcoin",
+      "LIGHTNING": "Endereço Lightning"
+    },
+    "HOW_TO_USE": {
+      "TITLE": "Como usar"
     }
   }
   

@@ -2,6 +2,8 @@
   <div class="logo">Login Boilerplate</div>
 
   <div class="right-actions">
+    <button mat-button (click)="openHowToUse()">{{ 'HOW_TO_USE.TITLE' | translate }}</button>
+    <button mat-button (click)="openContribute()">{{ 'CONTRIBUTE.TITLE' | translate }}</button>
     <a *ngIf="!loggedIn" mat-button routerLink="/login" class="login-button">{{ 'LOGIN.TITLE' | translate }}</a>
     <button *ngIf="loggedIn" mat-button (click)="logout()">Logout</button>
     <div class="lang-menu">
