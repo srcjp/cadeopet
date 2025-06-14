@@ -6,11 +6,12 @@ import Supercluster from 'supercluster';
 import { PetService, PetReport } from './pet.service';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pet-map',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule],
+  imports: [CommonModule, RouterModule, MatButtonModule, TranslateModule],
   templateUrl: './pet-map.component.html',
   styleUrls: ['./pet-map.component.scss']
 })
@@ -22,7 +23,7 @@ export class PetMapComponent implements OnInit {
   myPets: PetReport[] = [];
   showTable = false;
 
-  constructor(private service: PetService) {}
+  constructor(private service: PetService, private translate: TranslateService) {}
 
   get loggedIn(): boolean {
     return !!localStorage.getItem('accessToken');
@@ -125,14 +126,14 @@ export class PetMapComponent implements OnInit {
           ? `<img src="${pet.images[0]}" class="popup-img" style="width:210px;height:232px;" />`
           : '';
         const info = `
-          ${pet.name ? `<div class="info-item"><span class="label">Nome:</span> ${pet.name}</div>` : ''}
-          ${pet.date ? `<div class="info-item"><span class="label">Data:</span> ${pet.date}</div>` : ''}
-          <div class="info-item"><span class="label">Status:</span> ${pet.status}</div>
-          ${pet.breed ? `<div class="info-item"><span class="label">Raça:</span> ${pet.breed}</div>` : ''}
-          ${pet.size ? `<div class="info-item"><span class="label">Tamanho:</span> ${pet.size}</div>` : ''}
-          ${pet.color ? `<div class="info-item"><span class="label">Cor:</span> ${pet.color}</div>` : ''}
-          ${pet.phone ? `<div class="info-item"><span class="label">Telefone:</span> ${pet.phone}</div>` : ''}
-          ${pet.observation ? `<div class="info-item"><span class="label">Observação:</span> ${pet.observation}</div>` : ''}
+          ${pet.name ? `<div class="info-item"><span class="label">${this.translate.instant('PET.NAME')}:</span> ${pet.name}</div>` : ''}
+          ${pet.date ? `<div class="info-item"><span class="label">${this.translate.instant('PET.DATE')}:</span> ${new Date(pet.date).toLocaleDateString('pt-BR')}</div>` : ''}
+          <div class="info-item"><span class="label">${this.translate.instant('PET.STATUS')}:</span> ${pet.status}</div>
+          ${pet.breed ? `<div class="info-item"><span class="label">${this.translate.instant('PET.BREED')}:</span> ${pet.breed}</div>` : ''}
+          ${pet.size ? `<div class="info-item"><span class="label">${this.translate.instant('PET.SIZE')}:</span> ${pet.size}</div>` : ''}
+          ${pet.color ? `<div class="info-item"><span class="label">${this.translate.instant('PET.COLOR')}:</span> ${pet.color}</div>` : ''}
+          ${pet.phone ? `<div class="info-item"><span class="label">${this.translate.instant('PET.PHONE')}:</span> ${pet.phone}</div>` : ''}
+          ${pet.observation ? `<div class="info-item"><span class="label">${this.translate.instant('PET.OBSERVATION')}:</span> ${pet.observation}</div>` : ''}
         `;
         const html = `
           <div class="popup-card">

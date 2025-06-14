@@ -88,6 +88,26 @@
         "PORTUGUESE": "Portuguese",
         "ENGLISH": "English"
       }
-        
+
+      ,"PET": {
+        "ADD": "Add pet",
+        "MY_RECORDS": "My records",
+        "IMAGE": "Image",
+        "STATUS": "Status",
+        "NAME": "Name",
+        "DATE": "Date",
+        "BREED": "Breed",
+        "SIZE": "Size",
+        "COLOR": "Color",
+        "OBSERVATION": "Observation",
+        "PHONE": "Phone",
+        "ACTIONS": "Actions",
+        "EDIT": "Edit",
+        "REMOVE": "Remove"
+        ,"STATUS_LOST": "Lost"
+        ,"STATUS_FOUND": "Found"
+        ,"SAVE": "Save"
+      }
+
   }
   

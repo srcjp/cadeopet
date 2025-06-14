@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pet-form',
@@ -20,7 +21,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    TranslateModule
   ],
   templateUrl: './pet-form.component.html',
   styleUrls: ['./pet-form.component.scss']

@@ -1,22 +1,22 @@
 <div class="actions" *ngIf="loggedIn">
-  <a mat-raised-button color="primary" routerLink="/pet/new">Adicionar pet</a>
-  <button mat-raised-button color="accent" (click)="toggleTable()">Meus registros</button>
+  <a mat-raised-button color="primary" routerLink="/pet/new">{{ 'PET.ADD' | translate }}</a>
+  <button mat-raised-button color="accent" (click)="toggleTable()">{{ 'PET.MY_RECORDS' | translate }}</button>
 </div>
 <div id="map"></div>
 
 <table *ngIf="showTable" class="my-pets">
   <thead>
     <tr>
-      <th>Imagem</th>
-      <th>Status</th>
-      <th>Nome</th>
-      <th>Data</th>
-      <th>Raça</th>
-      <th>Tamanho</th>
-      <th>Cor</th>
-      <th>Observação</th>
-      <th>Telefone</th>
-      <th>Ações</th>
+      <th>{{ 'PET.IMAGE' | translate }}</th>
+      <th>{{ 'PET.STATUS' | translate }}</th>
+      <th>{{ 'PET.NAME' | translate }}</th>
+      <th>{{ 'PET.DATE' | translate }}</th>
+      <th>{{ 'PET.BREED' | translate }}</th>
+      <th>{{ 'PET.SIZE' | translate }}</th>
+      <th>{{ 'PET.COLOR' | translate }}</th>
+      <th>{{ 'PET.OBSERVATION' | translate }}</th>
+      <th>{{ 'PET.PHONE' | translate }}</th>
+      <th>{{ 'PET.ACTIONS' | translate }}</th>
     </tr>
   </thead>
   <tbody>
@@ -26,15 +26,15 @@
       </td>
       <td>{{p.status}}</td>
       <td>{{p.name}}</td>
-      <td>{{p.date}}</td>
+      <td>{{p.date | date:'dd/MM/yyyy'}}</td>
       <td>{{p.breed}}</td>
       <td>{{p.size}}</td>
       <td>{{p.color}}</td>
       <td>{{p.observation}}</td>
       <td>{{p.phone}}</td>
       <td>
-        <a mat-button color="primary" [routerLink]="['/pet', p.id, 'edit']">Editar</a>
-        <button mat-button color="warn" (click)="remove(p)">Remover</button>
+        <a mat-button color="primary" [routerLink]="['/pet', p.id, 'edit']">{{ 'PET.EDIT' | translate }}</a>
+        <button mat-button color="warn" (click)="remove(p)">{{ 'PET.REMOVE' | translate }}</button>
       </td>
     </tr>
   </tbody>
