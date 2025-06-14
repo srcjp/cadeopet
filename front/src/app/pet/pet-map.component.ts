@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
-import { defaultIcon } from './map-icon';
+import { lostIcon, foundIcon } from './map-icon';
 import Supercluster from 'supercluster';
 import { PetService, PetReport } from './pet.service';
 import { RouterModule } from '@angular/router';
@@ -139,7 +139,8 @@ export class PetMapComponent implements OnInit {
         this.clusterLayer.addLayer(marker);
       } else {
         const pet = (c.properties as any).pet as PetReport;
-        const marker = L.marker([lat, lng], { icon: defaultIcon });
+        const icon = pet.status === 'FOUND' ? foundIcon : lostIcon;
+        const marker = L.marker([lat, lng], { icon });
         const popupHost = document.createElement('div');
         const compRef = this.vcr.createComponent(PetPopupComponent, {
           environmentInjector: this.injector

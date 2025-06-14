@@ -16,6 +16,7 @@ export interface PetReport {
   latitude?: number;
   longitude?: number;
   images?: string[];
+  deleted?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })

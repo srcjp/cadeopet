@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let p of data.pets">
+        <tr *ngFor="let p of data.pets" [class.deleted]="p.deleted">
           <td>
             <img *ngIf="p.images?.length" [src]="p.images?.[0]" width="50" />
           </td>
@@ -30,8 +30,8 @@
           <td>{{ p.observation }}</td>
           <td>{{ p.phone }}</td>
           <td>
-            <button mat-button color="primary" (click)="edit(p)">{{ 'PET.EDIT' | translate }}</button>
-            <button mat-button color="warn" (click)="remove(p)">{{ 'PET.REMOVE' | translate }}</button>
+            <button mat-button color="primary" (click)="edit(p)" [disabled]="p.deleted">{{ 'PET.EDIT' | translate }}</button>
+            <button mat-button color="warn" (click)="remove(p)" [disabled]="p.deleted">{{ 'PET.REMOVE' | translate }}</button>
           </td>
         </tr>
       </tbody>
