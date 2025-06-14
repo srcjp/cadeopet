@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
+import { defaultIcon } from './map-icon';
 import Supercluster from 'supercluster';
 import { PetService, PetReport } from './pet.service';
 import { RouterModule } from '@angular/router';
@@ -119,23 +120,24 @@ export class PetMapComponent implements OnInit {
         this.clusterLayer.addLayer(marker);
       } else {
         const pet = (c.properties as any).pet as PetReport;
-        const marker = L.marker([lat, lng]);
+        const marker = L.marker([lat, lng], { icon: defaultIcon });
         const img = pet.images && pet.images[0] ? `<img src="${pet.images[0]}" class="popup-img" />` : '';
         const html = `${img}<div><strong>${pet.name || ''}</strong><br/>${pet.date || ''}<br/><strong>${pet.status}</strong><br/>${pet.breed || ''}<br/>${pet.color || ''}<br/>${pet.phone || ''}<br/>${pet.observation || ''}</div>`;
         marker.bindPopup(html);
         marker.on('popupopen', () => {
-          const el = document.querySelector('.popup-img') as HTMLImageElement;
-          if(el){
-            el.addEventListener('click', () => {
-              const src = el.getAttribute('src');
-              if(src){
+          const popupEl = marker.getPopup()?.getElement();
+          const imgEl = popupEl?.querySelector('.popup-img') as HTMLImageElement | null;
+          if (imgEl) {
+            imgEl.addEventListener('click', () => {
+              const src = imgEl.getAttribute('src');
+              if (src) {
                 const overlay = document.createElement('div');
                 overlay.className = 'img-overlay';
                 overlay.innerHTML = `<button class="close-btn">X</button><img src="${src}"/>`;
                 const btn = overlay.querySelector('.close-btn') as HTMLButtonElement;
                 btn.addEventListener('click', () => overlay.remove());
                 overlay.addEventListener('click', e => {
-                  if(e.target === overlay) overlay.remove();
+                  if (e.target === overlay) overlay.remove();
                 });
                 document.body.appendChild(overlay);
               }

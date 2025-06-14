@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { PetService } from './pet.service';
 import * as L from 'leaflet';
+import { defaultIcon } from './map-icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -90,7 +91,7 @@ export class PetFormComponent implements OnInit, AfterViewInit {
     if(this.map && this.pendingCoords){
       const [lat, lng] = this.pendingCoords;
       this.pendingCoords = undefined;
-      this.marker = L.marker([lat, lng]).addTo(this.map);
+      this.marker = L.marker([lat, lng], { icon: defaultIcon }).addTo(this.map);
       this.map.setView([lat, lng], 13);
     }
   }
@@ -99,7 +100,7 @@ export class PetFormComponent implements OnInit, AfterViewInit {
     if(this.marker){
       this.map!.removeLayer(this.marker);
     }
-    this.marker = L.marker(ev.latlng).addTo(this.map!);
+    this.marker = L.marker(ev.latlng, { icon: defaultIcon }).addTo(this.map!);
     this.form.patchValue({
       latitude: ev.latlng.lat,
       longitude: ev.latlng.lng
