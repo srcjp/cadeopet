@@ -54,6 +54,7 @@ public class SecurityConfiguration {
             "/swagger-ui.html",
             "/webjars/**",
             "/file/*",
+            "/uploads/**",
             "/error/*",
             "/"
     };
