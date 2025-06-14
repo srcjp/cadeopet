@@ -121,9 +121,21 @@ export class PetMapComponent implements OnInit {
       } else {
         const pet = (c.properties as any).pet as PetReport;
         const marker = L.marker([lat, lng], { icon: defaultIcon });
-        const img = pet.images && pet.images[0] ? `<img src="${pet.images[0]}" class="popup-img" />` : '';
-        const html = `${img}<div><strong>${pet.name || ''}</strong><br/>${pet.date || ''}<br/><strong>${pet.status}</strong><br/>${pet.breed || ''}<br/>${pet.color || ''}<br/>${pet.phone || ''}<br/>${pet.observation || ''}</div>`;
-        marker.bindPopup(html);
+        const img = pet.images && pet.images[0]
+          ? `<img src="${pet.images[0]}" class="popup-img" />`
+          : '';
+        const info = `
+          ${pet.name ? `<div class="info-item"><span class="label">Nome:</span> ${pet.name}</div>` : ''}
+          ${pet.date ? `<div class="info-item"><span class="label">Data:</span> ${pet.date}</div>` : ''}
+          <div class="info-item"><span class="label">Status:</span> ${pet.status}</div>
+          ${pet.breed ? `<div class="info-item"><span class="label">Raça:</span> ${pet.breed}</div>` : ''}
+          ${pet.size ? `<div class="info-item"><span class="label">Tamanho:</span> ${pet.size}</div>` : ''}
+          ${pet.color ? `<div class="info-item"><span class="label">Cor:</span> ${pet.color}</div>` : ''}
+          ${pet.phone ? `<div class="info-item"><span class="label">Telefone:</span> ${pet.phone}</div>` : ''}
+          ${pet.observation ? `<div class="info-item"><span class="label">Observação:</span> ${pet.observation}</div>` : ''}
+        `;
+        const html = `${img}<div class="popup-info">${info}</div>`;
+        marker.bindPopup(html, { className: 'pet-popup', maxWidth: 260 });
         marker.on('popupopen', () => {
           const popupEl = marker.getPopup()?.getElement();
           const imgEl = popupEl?.querySelector('.popup-img') as HTMLImageElement | null;

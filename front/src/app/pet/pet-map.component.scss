@@ -53,11 +53,23 @@
   }
 }
 
-.popup-img {
-  width: 240px;
-  height: 220px;
-  object-fit: cover;
-  cursor: pointer;
+.pet-popup {
+  max-width: 260px;
+
+  .popup-img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  .info-item {
+    margin: 2px 0;
+  }
+
+  .label {
+    font-weight: 600;
+  }
 }
 
 table.my-pets {
