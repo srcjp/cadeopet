@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
+import 'leaflet.markercluster';
 import { PetService, PetReport } from './pet.service';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -65,9 +66,10 @@ export class PetMapComponent implements OnInit {
 
   private loadMarkers() {
     if(!this.map) return;
+    const cluster = (L as any).markerClusterGroup();
     for(const pet of this.pets){
       if(pet.latitude && pet.longitude){
-        const marker = L.marker([pet.latitude, pet.longitude]).addTo(this.map!);
+        const marker = L.marker([pet.latitude, pet.longitude]);
         const img = pet.images && pet.images[0] ? `<img src="${pet.images[0]}" class="popup-img" />` : '';
         const html = `${img}<div><strong>${pet.name || ''}</strong><br/>${pet.date || ''}<br/><strong>${pet.status}</strong><br/>${pet.breed || ''}<br/>${pet.color || ''}<br/>${pet.phone || ''}<br/>${pet.observation || ''}</div>`;
         marker.bindPopup(html);
@@ -90,8 +92,10 @@ export class PetMapComponent implements OnInit {
             });
           }
         });
+        cluster.addLayer(marker);
       }
     }
+    this.map.addLayer(cluster);
   }
 
   toggleTable(){

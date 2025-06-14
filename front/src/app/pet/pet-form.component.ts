@@ -91,6 +91,7 @@ export class PetFormComponent implements OnInit, AfterViewInit {
       const [lat, lng] = this.pendingCoords;
       this.pendingCoords = undefined;
       this.marker = L.marker([lat, lng]).addTo(this.map);
+      this.map.setView([lat, lng], 13);
     }
   }
 
