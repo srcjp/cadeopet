@@ -13,7 +13,8 @@ import { PetReport } from './pet.service';
 export class PetPopupComponent {
   @Input() pet!: PetReport;
 
-  openImage(src: string) {
+  openImage(src?: string) {
+    if (!src) return;
     const existing = document.querySelector('.img-overlay');
     if (existing) existing.remove();
 

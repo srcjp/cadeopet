@@ -1,5 +1,5 @@
 <div class="popup-card">
-  <img *ngIf="pet.images?.length" [src]="pet.images[0]" class="popup-img" (click)="openImage(pet.images[0])" />
+  <img *ngIf="pet.images?.length" [src]="pet.images?.[0]" class="popup-img" (click)="openImage(pet.images?.[0])" />
   <div class="popup-info-card">
     <div class="info-item" *ngIf="pet.name"><span class="label">{{ 'PET.NAME' | translate }}:</span> {{ pet.name }}</div>
     <div class="info-item" *ngIf="pet.date"><span class="label">{{ 'PET.DATE' | translate }}:</span> {{ pet.date | date:'dd/MM/yyyy' }}</div>
