@@ -11,7 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateModule } from '@ngx-translate/core';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pet-form',
@@ -25,6 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatButtonModule,
     MatSelectModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     TranslateModule
   ],
   templateUrl: './pet-form.component.html',
@@ -33,6 +36,9 @@ import { TranslateModule } from '@ngx-translate/core';
 export class PetFormComponent implements OnInit, AfterViewInit {
   form!: FormGroup;
   images: File[] = [];
+  imageUrls: string[] = [];
+  private existingImages: string[] = [];
+  loading = false;
   private map?: L.Map;
   private marker?: L.Marker;
   private pendingCoords?: L.LatLngTuple;
@@ -70,6 +76,10 @@ export class PetFormComponent implements OnInit, AfterViewInit {
       this.id = +paramId;
       this.service.get(this.id).subscribe(p => {
         this.form.patchValue(p);
+        if (p.images) {
+          this.existingImages = p.images;
+          this.imageUrls = [...p.images];
+        }
         if(p.latitude && p.longitude){
           this.pendingCoords = [p.latitude, p.longitude];
           this.setMarkerIfPossible();
@@ -125,6 +135,14 @@ export class PetFormComponent implements OnInit, AfterViewInit {
   onFile(event: any){
     const files: FileList = event.target.files;
     this.images = Array.from(files).slice(0,3);
+    this.imageUrls = [...this.existingImages];
+    this.images.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageUrls.push(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    });
   }
 
   close() {
@@ -141,6 +159,7 @@ export class PetFormComponent implements OnInit, AfterViewInit {
   }
 
   submit(){
+    this.loading = true;
     const data = new FormData();
     for(const key in this.form.value){
       const val = (this.form.value as any)[key];
@@ -150,7 +169,9 @@ export class PetFormComponent implements OnInit, AfterViewInit {
     }
     this.images.forEach(f => data.append('images', f));
     const handle = (obs: any) => {
-      obs.subscribe(() => {
+      obs
+        .pipe(finalize(() => (this.loading = false)))
+        .subscribe(() => {
         if (this.dialogRef) {
           this.dialogRef.close(true);
         } else {
