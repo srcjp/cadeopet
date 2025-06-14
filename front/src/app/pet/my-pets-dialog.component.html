@@ -13,6 +13,7 @@
           <th>{{ 'PET.COLOR' | translate }}</th>
           <th>{{ 'PET.OBSERVATION' | translate }}</th>
           <th>{{ 'PET.PHONE' | translate }}</th>
+          <th>{{ 'PET.ACTIONS' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,10 @@
           <td>{{ p.color }}</td>
           <td>{{ p.observation }}</td>
           <td>{{ p.phone }}</td>
+          <td>
+            <a mat-button color="primary" [routerLink]="['/pet', p.id, 'edit']">{{ 'PET.EDIT' | translate }}</a>
+            <button mat-button color="warn" (click)="remove(p)">{{ 'PET.REMOVE' | translate }}</button>
+          </td>
         </tr>
       </tbody>
     </table>

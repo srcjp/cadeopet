@@ -9,11 +9,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MyPetsDialogComponent } from './my-pets-dialog.component';
+import { PetPopupComponent } from './pet-popup.component';
+import { ViewContainerRef, EnvironmentInjector } from '@angular/core';
 
 @Component({
   selector: 'app-pet-map',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, MatDialogModule, TranslateModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    MatDialogModule,
+    TranslateModule,
+    PetPopupComponent
+  ],
   templateUrl: './pet-map.component.html',
   styleUrls: ['./pet-map.component.scss']
 })
@@ -27,7 +36,9 @@ export class PetMapComponent implements OnInit {
   constructor(
     private service: PetService,
     private translate: TranslateService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private vcr: ViewContainerRef,
+    private injector: EnvironmentInjector
   ) {}
 
   get loggedIn(): boolean {
@@ -127,53 +138,14 @@ export class PetMapComponent implements OnInit {
       } else {
         const pet = (c.properties as any).pet as PetReport;
         const marker = L.marker([lat, lng], { icon: defaultIcon });
-        const img = pet.images && pet.images[0]
-          ? `<img src="${pet.images[0]}" class="popup-img" style="width:210px;height:232px;" />`
-          : '';
-        const info = `
-          ${pet.name ? `<div class="info-item"><span class="label">${this.translate.instant('PET.NAME')}:</span> ${pet.name}</div>` : ''}
-          ${pet.date ? `<div class="info-item"><span class="label">${this.translate.instant('PET.DATE')}:</span> ${new Date(pet.date).toLocaleDateString('pt-BR')}</div>` : ''}
-          <div class="info-item"><span class="label">${this.translate.instant('PET.STATUS')}:</span> ${pet.status}</div>
-          ${pet.breed ? `<div class="info-item"><span class="label">${this.translate.instant('PET.BREED')}:</span> ${pet.breed}</div>` : ''}
-          ${pet.size ? `<div class="info-item"><span class="label">${this.translate.instant('PET.SIZE')}:</span> ${pet.size}</div>` : ''}
-          ${pet.color ? `<div class="info-item"><span class="label">${this.translate.instant('PET.COLOR')}:</span> ${pet.color}</div>` : ''}
-          ${pet.phone ? `<div class="info-item"><span class="label">${this.translate.instant('PET.PHONE')}:</span> ${pet.phone}</div>` : ''}
-          ${pet.observation ? `<div class="info-item"><span class="label">${this.translate.instant('PET.OBSERVATION')}:</span> ${pet.observation}</div>` : ''}
-        `;
-        const html = `
-          <div class="popup-card">
-            ${img}
-            <div class="popup-info-card">${info}</div>
-          </div>
-        `;
-        marker.bindPopup(html, { className: 'pet-popup', maxWidth: 260 });
-        marker.on('popupopen', () => {
-          const popupEl = marker.getPopup()?.getElement();
-          const imgEl = popupEl?.querySelector('.popup-img') as HTMLImageElement | null;
-          if (imgEl) {
-            imgEl.addEventListener('click', () => {
-              const src = imgEl.getAttribute('src');
-              if (src) {
-                const existing = document.querySelector('.img-overlay');
-                if (existing) existing.remove();
-
-                const overlay = document.createElement('div');
-                overlay.className = 'img-overlay';
-                overlay.innerHTML = `
-                  <div class="mat-card img-card">
-                    <button class="close-btn material-icons">close</button>
-                    <img src="${src}" />
-                  </div>`;
-                const btn = overlay.querySelector('.close-btn') as HTMLButtonElement;
-                btn.addEventListener('click', () => overlay.remove());
-                overlay.addEventListener('click', e => {
-                  if (e.target === overlay) overlay.remove();
-                });
-                document.body.appendChild(overlay);
-              }
-            });
-          }
+        const popupHost = document.createElement('div');
+        const compRef = this.vcr.createComponent(PetPopupComponent, {
+          environmentInjector: this.injector
         });
+        compRef.instance.pet = pet;
+        popupHost.appendChild(compRef.location.nativeElement);
+        marker.bindPopup(popupHost, { className: 'pet-popup', maxWidth: 260 });
+        marker.on('popupclose', () => compRef.destroy());
         this.clusterLayer.addLayer(marker);
       }
     }
@@ -181,8 +153,8 @@ export class PetMapComponent implements OnInit {
 
   openMyPets() {
     this.dialog.open(MyPetsDialogComponent, {
-      width: '90%',
-      maxWidth: '600px',
+      width: '90vw',
+      maxWidth: '90vw',
       data: { pets: this.myPets }
     });
   }
