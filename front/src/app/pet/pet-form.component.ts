@@ -39,6 +39,7 @@ export class PetFormComponent implements OnInit, AfterViewInit {
   imageUrls: string[] = [];
   private existingImages: string[] = [];
   loading = false;
+  imageLoading = false;
   private map?: L.Map;
   private marker?: L.Marker;
   private pendingCoords?: L.LatLngTuple;
@@ -145,12 +146,23 @@ export class PetFormComponent implements OnInit, AfterViewInit {
 
   onFile(event: any){
     const files: FileList = event.target.files;
-    this.images = Array.from(files).slice(0,3);
+    this.imageLoading = true;
+    this.images = Array.from(files)
+      .filter(f => f.type.startsWith('image/'))
+      .slice(0, 3);
     this.imageUrls = [...this.existingImages];
+    let remaining = this.images.length;
+    if (remaining === 0) {
+      this.imageLoading = false;
+    }
     this.images.forEach(file => {
       const reader = new FileReader();
       reader.onload = () => {
         this.imageUrls.push(reader.result as string);
+        remaining--;
+        if (remaining === 0) {
+          this.imageLoading = false;
+        }
       };
       reader.readAsDataURL(file);
     });

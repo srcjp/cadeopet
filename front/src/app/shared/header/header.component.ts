@@ -5,18 +5,29 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ContributeDialogComponent } from '../contribute-dialog.component';
+import { HowToUseDialogComponent } from '../how-to-use-dialog.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, MatMenuModule, MatButtonModule, MatIconModule, TranslateModule, RouterModule],
+  imports: [
+    CommonModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    TranslateModule,
+    RouterModule,
+    MatDialogModule
+  ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
   currentLang!: string;
 
-  constructor(private translate: TranslateService,) {
+  constructor(private translate: TranslateService, private dialog: MatDialog) {
     this.translate.addLangs(['pt','en']);
 
     const saved = localStorage.getItem('lang');
@@ -43,5 +54,13 @@ export class HeaderComponent {
 
   logout(){
     localStorage.removeItem('accessToken');
+  }
+
+  openContribute() {
+    this.dialog.open(ContributeDialogComponent, { maxWidth: '400px' });
+  }
+
+  openHowToUse() {
+    this.dialog.open(HowToUseDialogComponent, { maxWidth: '560px' });
   }
 }

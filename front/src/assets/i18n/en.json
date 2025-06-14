@@ -109,6 +109,19 @@
         ,"STATUS_LOST": "Lost"
         ,"STATUS_FOUND": "Found"
         ,"SAVE": "Save"
+      },
+      "FOOTER": {
+        "BY": "by jpfurlan"
+      },
+      "CONTRIBUTE": {
+        "TITLE": "Contribute",
+        "TEXT": "Help keep the project, servers and domain running.",
+        "PIX": "Pix Key",
+        "BITCOIN": "Bitcoin Address",
+        "LIGHTNING": "Lightning Address"
+      },
+      "HOW_TO_USE": {
+        "TITLE": "How to use"
       }
 
   }

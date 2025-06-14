@@ -51,8 +51,9 @@
       <div class="coords">Lat: {{form.value.latitude}} - Lng: {{form.value.longitude}}</div>
 
       <label class="images-label">{{ 'PET.IMAGES' | translate }}</label>
-      <input type="file" multiple (change)="onFile($event)" />
+      <input type="file" multiple accept="image/*" (change)="onFile($event)" />
       <div class="preview-list">
+        <mat-progress-spinner *ngIf="imageLoading" diameter="30" mode="indeterminate"></mat-progress-spinner>
         <img *ngFor="let img of imageUrls" [src]="img" />
       </div>
     </div>
