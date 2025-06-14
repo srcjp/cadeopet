@@ -4,7 +4,6 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
-import { RouterModule } from '@angular/router';
 import { PetReport, PetService } from './pet.service';
 
 @Component({
@@ -15,7 +14,6 @@ import { PetReport, PetService } from './pet.service';
     MatDialogModule,
     MatButtonModule,
     MatCardModule,
-    RouterModule,
     TranslateModule
   ],
   templateUrl: './my-pets-dialog.component.html',
@@ -37,5 +35,10 @@ export class MyPetsDialogComponent {
     this.service.delete(p.id).subscribe(() => {
       this.data.pets = this.data.pets.filter(m => m.id !== p.id);
     });
+  }
+
+  edit(p: PetReport) {
+    if (!p.id) return;
+    this.dialogRef.close({ edit: p.id });
   }
 }

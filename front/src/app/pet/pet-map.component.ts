@@ -6,11 +6,12 @@ import Supercluster from 'supercluster';
 import { PetService, PetReport } from './pet.service';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MyPetsDialogComponent } from './my-pets-dialog.component';
 import { PetPopupComponent } from './pet-popup.component';
 import { ViewContainerRef, EnvironmentInjector } from '@angular/core';
+import { PetFormComponent } from './pet-form.component';
 
 @Component({
   selector: 'app-pet-map',
@@ -32,6 +33,7 @@ export class PetMapComponent implements OnInit {
   private clusterLayer = L.layerGroup();
   pets: PetReport[] = [];
   myPets: PetReport[] = [];
+  private myPetsDialog?: MatDialogRef<MyPetsDialogComponent>;
 
   constructor(
     private service: PetService,
@@ -152,11 +154,56 @@ export class PetMapComponent implements OnInit {
   }
 
   openMyPets() {
-    this.dialog.open(MyPetsDialogComponent, {
+    this.myPetsDialog = this.dialog.open(MyPetsDialogComponent, {
       width: '90vw',
       maxWidth: '90vw',
       data: { pets: this.myPets }
     });
+
+    this.myPetsDialog.afterClosed().subscribe(result => {
+      if (result && result.edit) {
+        this.openPetForm(result.edit);
+      } else if (result) {
+        this.reloadPets();
+      }
+    });
+  }
+
+  private reloadPets() {
+    this.service.list().subscribe({
+      next: pets => {
+        this.pets = pets;
+        this.buildCluster();
+        this.updateClusters();
+      }
+    });
+
+    if (this.loggedIn) {
+      this.service.myList().subscribe({
+        next: p => {
+          this.myPets = p;
+          if (this.myPetsDialog) {
+            this.myPetsDialog.componentInstance.data.pets = this.myPets;
+          }
+        },
+        error: () => {}
+      });
+    }
+  }
+
+  openPetForm(id?: number) {
+    this.dialog
+      .open(PetFormComponent, {
+        width: '90vw',
+        maxWidth: '90vw',
+        data: id ? { id } : undefined
+      })
+      .afterClosed()
+      .subscribe(result => {
+        if (result) {
+          this.reloadPets();
+        }
+      });
   }
 
   remove(p: PetReport){

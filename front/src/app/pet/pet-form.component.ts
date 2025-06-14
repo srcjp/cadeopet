@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Optional, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PetService } from './pet.service';
 import * as L from 'leaflet';
 import { defaultIcon } from './map-icon';
@@ -36,7 +37,14 @@ export class PetFormComponent implements OnInit, AfterViewInit {
 
   id?: number;
 
-  constructor(private fb: FormBuilder, private service: PetService, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private fb: FormBuilder,
+    private service: PetService,
+    private router: Router,
+    private route: ActivatedRoute,
+    @Optional() private dialogRef?: MatDialogRef<PetFormComponent>,
+    @Inject(MAT_DIALOG_DATA) @Optional() data?: { id?: number }
+  ) {
     this.form = this.fb.group({
       status: ['LOST', Validators.required],
       name: ['', Validators.required],
@@ -49,12 +57,15 @@ export class PetFormComponent implements OnInit, AfterViewInit {
       latitude: [null, Validators.required],
       longitude: [null, Validators.required]
     });
+    if (data && data.id) {
+      this.id = data.id;
+    }
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if(id){
-      this.id = +id;
+    const paramId = this.id ?? this.route.snapshot.paramMap.get('id');
+    if (paramId) {
+      this.id = +paramId;
       this.service.get(this.id).subscribe(p => {
         this.form.patchValue(p);
         if(p.latitude && p.longitude){
@@ -114,6 +125,12 @@ export class PetFormComponent implements OnInit, AfterViewInit {
     this.images = Array.from(files).slice(0,3);
   }
 
+  close() {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+  }
+
   canSave(): boolean {
     if(this.id){
       return this.form.valid;
@@ -130,12 +147,20 @@ export class PetFormComponent implements OnInit, AfterViewInit {
       }
     }
     this.images.forEach(f => data.append('images', f));
-    if(this.id){
-      this.service.update(this.id, data).subscribe(()=>this.router.navigate(['/pet']));
-    }else{
-      this.service.create(data).subscribe(()=>{
-        this.router.navigate(['/pet']);
+    const handle = (obs: any) => {
+      obs.subscribe(() => {
+        if (this.dialogRef) {
+          this.dialogRef.close(true);
+        } else {
+          this.router.navigate(['/pet']);
+        }
       });
+    };
+
+    if (this.id) {
+      handle(this.service.update(this.id, data));
+    } else {
+      handle(this.service.create(data));
     }
   }
 }

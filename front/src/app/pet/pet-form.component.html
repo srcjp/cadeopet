@@ -48,4 +48,5 @@
   <input type="file" multiple (change)="onFile($event)" />
 
   <button mat-raised-button color="primary" type="submit" [disabled]="!canSave()">{{ 'PET.SAVE' | translate }}</button>
+  <button mat-button type="button" (click)="close()" *ngIf="dialogRef">{{ 'COMMON.CLOSE' | translate }}</button>
 </form>
