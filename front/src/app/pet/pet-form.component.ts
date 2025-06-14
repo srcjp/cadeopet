@@ -42,7 +42,7 @@ export class PetFormComponent implements OnInit, AfterViewInit {
     private service: PetService,
     private router: Router,
     private route: ActivatedRoute,
-    @Optional() private dialogRef?: MatDialogRef<PetFormComponent>,
+    @Optional() public dialogRef?: MatDialogRef<PetFormComponent>,
     @Inject(MAT_DIALOG_DATA) @Optional() data?: { id?: number }
   ) {
     this.form = this.fb.group({
