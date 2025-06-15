@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AlertService } from '../../shared/alert.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RegisterRequest, Gender } from '../../models/register-request.model';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,8 @@ import { RegisterRequest, Gender } from '../../models/register-request.model';
     RouterModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    TranslateModule
+    TranslateModule,
+    NgxMaskDirective
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],

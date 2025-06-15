@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NgxMaskDirective } from 'ngx-mask';
 import { TranslateModule } from '@ngx-translate/core';
 import { finalize } from 'rxjs/operators';
 
@@ -32,7 +33,8 @@ import { finalize } from 'rxjs/operators';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    TranslateModule
+    TranslateModule,
+    NgxMaskDirective
   ],
   templateUrl: './pet-form.component.html',
   styleUrls: ['./pet-form.component.scss']
