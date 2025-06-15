@@ -7,6 +7,9 @@ import { PetService, PetReport } from './pet.service';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MyPetsDialogComponent } from './my-pets-dialog.component';
 import { PetPopupComponent } from './pet-popup.component';
@@ -21,6 +24,9 @@ import { PetFormComponent } from './pet-form.component';
     RouterModule,
     MatButtonModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
     TranslateModule,
     PetPopupComponent
   ],
@@ -32,8 +38,12 @@ export class PetMapComponent implements OnInit {
   private cluster?: Supercluster<{ pet: PetReport }>;
   private clusterLayer = L.layerGroup();
   pets: PetReport[] = [];
+  filteredPets: PetReport[] = [];
   myPets: PetReport[] = [];
   private myPetsDialog?: MatDialogRef<MyPetsDialogComponent>;
+
+  statusFilter: string = '';
+  periodFilter: number = 7;
 
   constructor(
     private service: PetService,
@@ -51,7 +61,7 @@ export class PetMapComponent implements OnInit {
     this.service.list().subscribe({
       next: pets => {
         this.pets = pets;
-        this.buildCluster();
+        this.applyFilters();
         this.initMap();
       },
       error: () => this.initMap()
@@ -96,7 +106,7 @@ export class PetMapComponent implements OnInit {
   }
 
   private buildCluster(){
-    const points = this.pets
+    const points = this.filteredPets
       .filter(p => p.latitude && p.longitude)
       .map(p => ({
         type: 'Feature',
@@ -154,6 +164,25 @@ export class PetMapComponent implements OnInit {
     }
   }
 
+  applyFilters(){
+    let filtered = this.pets;
+    if(this.statusFilter){
+      filtered = filtered.filter(p => p.status === this.statusFilter);
+    }
+    if(this.periodFilter){
+      const limit = new Date();
+      limit.setDate(limit.getDate() - this.periodFilter);
+      filtered = filtered.filter(p => {
+        return p.date ? new Date(p.date) >= limit : false;
+      });
+    }
+    this.filteredPets = filtered;
+    this.buildCluster();
+    if(this.map){
+      this.updateClusters();
+    }
+  }
+
   openMyPets() {
     this.myPetsDialog = this.dialog.open(MyPetsDialogComponent, {
       width: '90vw',
@@ -174,7 +203,7 @@ export class PetMapComponent implements OnInit {
     this.service.list().subscribe({
       next: pets => {
         this.pets = pets;
-        this.buildCluster();
+        this.applyFilters();
         this.updateClusters();
       }
     });
