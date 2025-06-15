@@ -38,6 +38,22 @@
   gap: 10px;
 }
 
+@media (max-width: 600px) {
+  .filters {
+    flex-direction: column;
+    .filter-field {
+      width: 100%;
+    }
+  }
+
+  .actions {
+    flex-direction: column;
+    button {
+      width: 100%;
+    }
+  }
+}
+
 
 .pet-popup {
   max-width: 260px;
