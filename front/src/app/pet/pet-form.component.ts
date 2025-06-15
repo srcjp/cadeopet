@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { finalize } from 'rxjs/operators';
 
@@ -28,6 +30,8 @@ import { finalize } from 'rxjs/operators';
     MatSelectModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     TranslateModule
   ],
   templateUrl: './pet-form.component.html',

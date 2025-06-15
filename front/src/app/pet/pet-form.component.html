@@ -20,7 +20,9 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>{{ 'PET.DATE' | translate }}</mat-label>
-        <input matInput type="date" formControlName="date" />
+        <input matInput [matDatepicker]="picker" formControlName="date" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>{{ 'PET.BREED' | translate }}</mat-label>
@@ -43,7 +45,7 @@
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>{{ 'PET.PHONE' | translate }}</mat-label>
-        <input matInput formControlName="phone" />
+        <input matInput formControlName="phone" mask="(00) 00000-0000" />
       </mat-form-field>
 
       <label class="address-label">{{ 'PET.SELECT_ADDRESS' | translate }}</label>

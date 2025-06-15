@@ -7,6 +7,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { authInterceptor } from './core/auth.interceptor';
+import { provideNgxMask } from 'ngx-mask';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimations(),
+    provideNgxMask(),
     importProvidersFrom(
       TranslateModule.forRoot({
         loader: {

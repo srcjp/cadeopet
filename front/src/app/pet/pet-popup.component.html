@@ -7,7 +7,12 @@
     <div class="info-item" *ngIf="pet.breed"><span class="label">{{ 'PET.BREED' | translate }}:</span> {{ pet.breed }}</div>
     <div class="info-item" *ngIf="pet.size"><span class="label">{{ 'PET.SIZE' | translate }}:</span> {{ pet.size }}</div>
     <div class="info-item" *ngIf="pet.color"><span class="label">{{ 'PET.COLOR' | translate }}:</span> {{ pet.color }}</div>
-    <div class="info-item" *ngIf="pet.phone"><span class="label">{{ 'PET.PHONE' | translate }}:</span> {{ pet.phone }}</div>
+    <div class="info-item" *ngIf="pet.phone">
+      <span class="label">{{ 'PET.PHONE' | translate }}:</span> {{ pet.phone }}
+      <a class="whatsapp-link" [href]="'https://wa.me/' + phoneDigits(pet.phone)" target="_blank">
+        <img src="assets/whatsapp.svg" alt="WhatsApp" />
+      </a>
+    </div>
     <div class="info-item" *ngIf="pet.observation"><span class="label">{{ 'PET.OBSERVATION' | translate }}:</span> {{ pet.observation }}</div>
   </div>
 </div>
