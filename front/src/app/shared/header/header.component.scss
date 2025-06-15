@@ -25,13 +25,14 @@
   text-transform: none;
   color: var(--primary-color);
 }
-  .lang-button {
-    text-transform: none;
-    font-weight: 500;
-  }
-  .lang-button mat-icon {
-    vertical-align: middle;
-  }
+.lang-button {
+  width: 36px;
+  height: 36px;
+}
+
+.lang-button mat-icon {
+  vertical-align: middle;
+}
 
 button.mat-button {
   color: var(--text-color);

@@ -7,9 +7,8 @@
     <a *ngIf="!loggedIn" mat-button routerLink="/login" class="login-button">{{ 'LOGIN.TITLE' | translate }}</a>
     <button *ngIf="loggedIn" mat-button (click)="logout()">Logout</button>
     <div class="lang-menu">
-      <button mat-button [matMenuTriggerFor]="menu">
-        {{ currentLang === 'pt' ? 'Português' : 'English' }}
-        <mat-icon>arrow_drop_down</mat-icon>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Change language" class="lang-button">
+        <mat-icon>language</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="switchLang('pt')">

@@ -1,4 +1,5 @@
-<mat-card class="login-card">
+<div class="login-container">
+  <mat-card class="login-card">
   <h1 class="title">{{ 'LOGIN.TITLE' | translate }}</h1>
 
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
@@ -56,4 +57,5 @@
       {{ 'LOGIN.SUBMIT' | translate }}
     </button>
   </form>
-</mat-card>
+  </mat-card>
+</div>
