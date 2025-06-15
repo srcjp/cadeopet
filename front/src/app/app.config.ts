@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { authInterceptor } from './core/auth.interceptor';
 import { provideNgxMask } from 'ngx-mask';
+import { MatNativeDateModule } from '@angular/material/core';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideNgxMask(),
     importProvidersFrom(
+      MatNativeDateModule,
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
