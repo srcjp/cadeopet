@@ -3,8 +3,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: var(--primary-color);
-  color: #fff;
+  background-color: #f5f5f5;
+  color: var(--text-color);
 }
 
 .logo {
@@ -23,7 +23,7 @@
 
 .login-button {
   text-transform: none;
-  color: #fff;
+  color: var(--primary-color);
 }
   .lang-button {
     text-transform: none;
@@ -34,5 +34,5 @@
   }
 
 button.mat-button {
-  color: #fff;
+  color: var(--text-color);
 }

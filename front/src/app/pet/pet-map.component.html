@@ -24,9 +24,9 @@
       </div>
     </div>
 
-    <div class="actions" *ngIf="loggedIn">
-      <button mat-raised-button color="primary" (click)="openPetForm()">{{ 'PET.ADD' | translate }}</button>
-      <button mat-raised-button color="accent" (click)="openMyPets()">{{ 'PET.MY_RECORDS' | translate }}</button>
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="handleAddPet()">{{ 'PET.ADD' | translate }}</button>
+      <button mat-raised-button color="accent" *ngIf="loggedIn" (click)="openMyPets()">{{ 'PET.MY_RECORDS' | translate }}</button>
     </div>
   </div>
 </div>
