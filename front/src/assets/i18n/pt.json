@@ -115,7 +115,12 @@
       "REMOVE": "Remover",
       "STATUS_LOST": "Perdido",
       "STATUS_FOUND": "Encontrado",
-      "SAVE": "Salvar"
+      "SAVE": "Salvar",
+      "FILTER_STATUS": "Filtrar Status",
+      "FILTER_PERIOD": "Período",
+      "LAST_7_DAYS": "Últimos 7 dias",
+      "LAST_15_DAYS": "Últimos 15 dias",
+      "ALL": "Todos"
     },
     "FOOTER": {
       "BY": "by jpfurlan"

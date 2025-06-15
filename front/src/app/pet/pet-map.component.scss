@@ -1,12 +1,26 @@
 #map {
-  height: 100vh;
+  height: calc(100vh - 64px);
   width: 100%;
   position: relative;
   z-index: 0;
 }
 
+.controls {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
 .actions {
-  margin: 10px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.filters {
   display: flex;
   gap: 10px;
 }
