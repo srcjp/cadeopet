@@ -109,6 +109,7 @@
         ,"STATUS_LOST": "Lost"
         ,"STATUS_FOUND": "Found"
         ,"SAVE": "Save",
+        "FILTERS_TITLE": "Filters",
         "FILTER_STATUS": "Filter Status",
         "FILTER_PERIOD": "Period",
         "LAST_7_DAYS": "Last 7 days",

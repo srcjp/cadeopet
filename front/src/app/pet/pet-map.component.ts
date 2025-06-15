@@ -43,7 +43,7 @@ export class PetMapComponent implements OnInit {
   private myPetsDialog?: MatDialogRef<MyPetsDialogComponent>;
 
   statusFilter: string = '';
-  periodFilter: number = 7;
+  periodFilter: number | '' = '';
 
   constructor(
     private service: PetService,
@@ -169,9 +169,9 @@ export class PetMapComponent implements OnInit {
     if(this.statusFilter){
       filtered = filtered.filter(p => p.status === this.statusFilter);
     }
-    if(this.periodFilter){
+    if(this.periodFilter !== ''){
       const limit = new Date();
-      limit.setDate(limit.getDate() - this.periodFilter);
+      limit.setDate(limit.getDate() - +this.periodFilter);
       filtered = filtered.filter(p => {
         return p.date ? new Date(p.date) >= limit : false;
       });
