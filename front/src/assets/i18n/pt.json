@@ -116,6 +116,7 @@
       "STATUS_LOST": "Perdido",
       "STATUS_FOUND": "Encontrado",
       "SAVE": "Salvar",
+      "FILTERS_TITLE": "Filtros",
       "FILTER_STATUS": "Filtrar Status",
       "FILTER_PERIOD": "Período",
       "LAST_7_DAYS": "Últimos 7 dias",

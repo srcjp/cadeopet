@@ -1,28 +1,32 @@
-<div id="map"></div>
+<div id="map">
+  <div class="controls">
+    <div class="filters-box">
+      <div class="filters-title">{{ 'PET.FILTERS_TITLE' | translate }}</div>
+      <div class="filters">
+        <mat-form-field appearance="fill" class="filter-field">
+          <mat-label>{{ 'PET.FILTER_STATUS' | translate }}</mat-label>
+          <mat-select [(ngModel)]="statusFilter" (selectionChange)="applyFilters()">
+            <mat-option value="">{{ 'PET.ALL' | translate }}</mat-option>
+            <mat-option value="LOST">{{ 'PET.STATUS_LOST' | translate }}</mat-option>
+            <mat-option value="FOUND">{{ 'PET.STATUS_FOUND' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-<div class="controls">
-  <div class="actions" *ngIf="loggedIn">
-    <button mat-raised-button color="primary" (click)="openPetForm()">{{ 'PET.ADD' | translate }}</button>
-    <button mat-raised-button color="accent" (click)="openMyPets()">{{ 'PET.MY_RECORDS' | translate }}</button>
-  </div>
+        <mat-form-field appearance="fill" class="filter-field">
+          <mat-label>{{ 'PET.FILTER_PERIOD' | translate }}</mat-label>
+          <mat-select [(ngModel)]="periodFilter" (selectionChange)="applyFilters()">
+            <mat-option value="">{{ 'PET.ALL' | translate }}</mat-option>
+            <mat-option value="7">{{ 'PET.LAST_7_DAYS' | translate }}</mat-option>
+            <mat-option value="15">{{ 'PET.LAST_15_DAYS' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
 
-  <div class="filters">
-    <mat-form-field appearance="fill" class="filter-field">
-      <mat-label>{{ 'PET.FILTER_STATUS' | translate }}</mat-label>
-      <mat-select [(ngModel)]="statusFilter" (selectionChange)="applyFilters()">
-        <mat-option value="">{{ 'PET.ALL' | translate }}</mat-option>
-        <mat-option value="LOST">{{ 'PET.STATUS_LOST' | translate }}</mat-option>
-        <mat-option value="FOUND">{{ 'PET.STATUS_FOUND' | translate }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="filter-field">
-      <mat-label>{{ 'PET.FILTER_PERIOD' | translate }}</mat-label>
-      <mat-select [(ngModel)]="periodFilter" (selectionChange)="applyFilters()">
-        <mat-option value="7">{{ 'PET.LAST_7_DAYS' | translate }}</mat-option>
-        <mat-option value="15">{{ 'PET.LAST_15_DAYS' | translate }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="actions" *ngIf="loggedIn">
+      <button mat-raised-button color="primary" (click)="openPetForm()">{{ 'PET.ADD' | translate }}</button>
+      <button mat-raised-button color="accent" (click)="openMyPets()">{{ 'PET.MY_RECORDS' | translate }}</button>
+    </div>
   </div>
 </div>
 

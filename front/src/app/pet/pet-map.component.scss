@@ -15,6 +15,19 @@
   z-index: 1000;
 }
 
+.filters-box {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filters-title {
+  font-weight: bold;
+}
+
 .actions {
   display: flex;
   gap: 10px;
