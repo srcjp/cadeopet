@@ -4,7 +4,7 @@ import * as L from 'leaflet';
 import { lostIcon, foundIcon } from './map-icon';
 import Supercluster from 'supercluster';
 import { PetService, PetReport } from './pet.service';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -50,7 +50,8 @@ export class PetMapComponent implements OnInit {
     private translate: TranslateService,
     private dialog: MatDialog,
     private vcr: ViewContainerRef,
-    private injector: EnvironmentInjector
+    private injector: EnvironmentInjector,
+    private router: Router
   ) {}
 
   get loggedIn(): boolean {
@@ -218,6 +219,14 @@ export class PetMapComponent implements OnInit {
         },
         error: () => {}
       });
+    }
+  }
+
+  handleAddPet() {
+    if (this.loggedIn) {
+      this.openPetForm();
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 
