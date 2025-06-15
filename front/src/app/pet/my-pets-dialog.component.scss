@@ -25,3 +25,11 @@ table.my-pets tr.deleted::after {
   color: #555;
   pointer-events: none;
 }
+
+@media (max-width: 600px) {
+  table.my-pets {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

@@ -3,7 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #2196f3, #21cbf3);
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  padding: 16px;
 }
 
 .login-card {
@@ -24,111 +25,33 @@
 .full-width {
   width: 100%;
   margin-bottom: 20px;
-}
-
-.links-container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 24px;
-
-  .link {
-    font-size: 14px;
-    text-decoration: none;
-    color: #1976d2;
-    transition: 0.2s;
-  }
-
-  .link:hover {
-    text-decoration: underline;
-  }
-}
-
-.login-button {
-  width: 100%;
-  padding: 10px;
-  font-weight: bold;
-  background-color: #4caf50 !important;
-  color: #fff;
-}
-
-.login-container {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(to right, #2196f3, #21cbf3);
-}
-
-.login-card {
-  width: 100%;
-  max-width: 400px;
-  padding: 32px;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  background-color: #fff;
-}
-
-.title {
-  text-align: center;
-  margin-bottom: 24px;
-  color: #1976d2;
-}
-
-.full-width {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.login-button {
-  width: 100%;
-  padding: 10px;
-  font-weight: bold;
-  background-color: #4caf50 !important;
-  color: #fff;
 }
 
 .links-container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
-
-  .link {
-    font-size: 14px;
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  .link:hover {
-    text-decoration: underline;
-  }
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+.link {
+  font-size: 14px;
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.login-button {
   width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  padding: 10px;
+  font-weight: bold;
+  background-color: #4caf50 !important;
+  color: #fff;
 }
 
 .eye-buttons {
   display: flex;
-  gap: 4px; // ajusta o espaçamento entre os ícones
-}
-
-:host {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; 
-}
-
-.login-container {
-  width: 360px; 
-  margin: 0 auto;
+  gap: 4px;
 }
