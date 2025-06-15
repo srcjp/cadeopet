@@ -88,6 +88,9 @@ export class PetFormComponent implements OnInit, AfterViewInit {
       this.id = +paramId;
       this.service.get(this.id).subscribe(p => {
         this.form.patchValue(p);
+        if(p.date){
+          this.form.patchValue({ date: new Date(p.date) });
+        }
         if (p.images) {
           this.existingImages = p.images;
           this.imageUrls = [...p.images];
@@ -191,8 +194,11 @@ export class PetFormComponent implements OnInit, AfterViewInit {
     this.loading = true;
     const data = new FormData();
     for(const key in this.form.value){
-      const val = (this.form.value as any)[key];
+      let val = (this.form.value as any)[key];
       if(val !== null && val !== undefined){
+        if(val instanceof Date){
+          val = val.toISOString().split('T')[0];
+        }
         data.append(key, ''+val);
       }
     }
