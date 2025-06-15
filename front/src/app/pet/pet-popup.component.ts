@@ -12,4 +12,8 @@ import { PetReport } from './pet.service';
 })
 export class PetPopupComponent {
   @Input() pet!: PetReport;
+
+  phoneDigits(phone: string): string {
+    return phone.replace(/\D/g, '');
+  }
 }
